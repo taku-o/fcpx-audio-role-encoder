@@ -1,0 +1,63 @@
+{
+  "name": "fcpx-audio-role-encoder",
+  "version": "0.1.0",
+  "description": "append iXML Chunk with 'audio role name' for 'Final Cut Pro X', to wav file.",
+  "main": "processor.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "all": "gulp tsc && gulp test && gulp lint && gulp format",
+    "tsc": "gulp tsc",
+    "lint": "gulp lint",
+    "formt": "gulp format",
+    "test": "gulp test"
+  },
+  "bin": {
+    "fcpx-audio-role-append": "bin/fcpx-audio-role-append.js"
+  },
+  "files": [
+    "README.md",
+    "bin/fcpx-audio-role-append.js",
+    "package-lock.json",
+    "package.json",
+    "processor.js",
+    "riff.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/taku-o/fcpx-audio-role-encoder.git"
+  },
+  "keywords": [
+    "wav",
+    "audio",
+    "ixml",
+    "fcpx",
+    "javascript"
+  ],
+  "homepage": "https://github.com/taku-o/fcpx-audio-role-encoder#readme",
+  "bugs": {
+    "url": "https://github.com/taku-o/fcpx-audio-role-encoder/issues"
+  },
+  "author": "taku-o <mail@nanasi.jp> (https://nanasi.jp/)",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.14.5",
+    "@typescript-eslint/parser": "^1.7.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.6.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-mocha": "^6.0.0",
+    "gulp-prettier": "^2.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-typescript": "^5.0.1",
+    "mocha": "^4.1.0",
+    "source-map-support": "^0.5.12",
+    "typescript": "^3.4.5",
+    "wav-fmt-validator": "^0.1.2"
+  }
+}
