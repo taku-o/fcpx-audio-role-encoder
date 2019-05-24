@@ -20,5 +20,7 @@ const trackName = options.t;
 
 const processor = new Processor();
 processor.append(input, trackName, output).then((out: string) => {
-  console.log(`FINISHED. generated:${out}`);
+  if (out) {
+    console.log(`${out}`);
+  }
 });
