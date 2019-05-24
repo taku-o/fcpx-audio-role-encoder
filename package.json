@@ -1,6 +1,6 @@
 {
   "name": "fcpx-audio-role-encoder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "append iXML Chunk with 'audio role name' for 'Final Cut Pro X', to wav file.",
   "main": "processor.js",
   "types": "types.d.ts",
