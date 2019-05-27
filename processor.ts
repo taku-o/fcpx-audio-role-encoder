@@ -29,6 +29,26 @@ class Processor {
       return resolve(wbuffer);
     });
   }
+  encodeSync(wavBuffer: Buffer, trackName: string): Buffer {
+    // parse wav file
+    let riff = Riff.from(wavBuffer);
+
+    // already has iXML chunk ?
+    for (let chunk of riff.subChunks) {
+      if (chunk instanceof iXML) {
+        return null;
+      }
+    }
+
+    // add iXML chunk
+    let iXMLChunk = iXML.fromTrackName(trackName);
+    riff.appendChunk(iXMLChunk);
+
+    // write file
+    let wbuffer = Buffer.alloc(riff.chunkLength);
+    riff.write(wbuffer);
+    return wbuffer;
+  }
 
   /**
    * append iXML chunk to wav file.

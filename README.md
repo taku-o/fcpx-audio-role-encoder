@@ -9,11 +9,12 @@ npm install --save fcpx-audio-role-encoder
 ```
 
 ## function
-### encode
+### encode / encodeSync
 append iXML chunk to wav Buffer.
 
 ```
 encode(wavBuffer: Buffer, trackName: string): Promise<Buffer>
+encodeSync(wavBuffer: Buffer, trackName: string): Buffer
 ```
 
 ```typescript

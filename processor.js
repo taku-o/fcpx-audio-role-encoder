@@ -19,6 +19,19 @@ class Processor {
             return resolve(wbuffer);
         });
     }
+    encodeSync(wavBuffer, trackName) {
+        let riff = riff_1.Riff.from(wavBuffer);
+        for (let chunk of riff.subChunks) {
+            if (chunk instanceof riff_1.iXML) {
+                return null;
+            }
+        }
+        let iXMLChunk = riff_1.iXML.fromTrackName(trackName);
+        riff.appendChunk(iXMLChunk);
+        let wbuffer = Buffer.alloc(riff.chunkLength);
+        riff.write(wbuffer);
+        return wbuffer;
+    }
     append(filePath, trackName, outPath) {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, 'binary', (err, content) => {
