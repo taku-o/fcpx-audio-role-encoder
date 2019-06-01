@@ -9,7 +9,7 @@ const options = require('minimist')(process.argv.slice(2));
 if (options.i && options.o && options.t) {
 } else {
   console.log(`usage:
-    wav-ixml-append -i in.wav -o out.wav -t trackName
+    fcpx-audio-role-append -i in.wav -o out.wav -t trackName
 `);
   process.exit(0);
 }
