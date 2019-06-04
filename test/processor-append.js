@@ -39,4 +39,27 @@ describe('encode', () => {
             return out;
         });
     });
+    it('should append iXML chunk to mixdown audio data.', (cb) => {
+        const wavFile = './test/mixdown-wav.wav';
+        const outFile = './test/mixdown-wav-out.wav';
+        const trackName = 'dummy-track';
+        const processor = new processor_1.default();
+        processor
+            .append(wavFile, trackName, outFile)
+            .then((out) => {
+            chai_1.assert.ok(out);
+            fs.readFile(out, 'binary', (err, content) => {
+                if (err) {
+                    return cb(err);
+                }
+                let buffer = Buffer.from(content, 'binary');
+                const result = wavParser(buffer);
+                chai_1.assert.ok(result);
+                cb();
+            });
+        })
+            .catch((err) => {
+            cb(err);
+        });
+    });
 });
