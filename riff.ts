@@ -82,7 +82,7 @@ export class Riff implements Chunk {
 /**
  * fmt Chunk
  */
-class Fmt implements Chunk {
+export class Fmt implements Chunk {
   chunkLength: number = 24;
   id: string = 'fmt ';
   size: number = 16;
@@ -229,7 +229,7 @@ export class iXML implements Chunk {
     // return
     return chunk;
   }
-  static fromTrackName(trackName: string) {
+  static fromTrackName(trackName: string, trackCount: number) {
     const replacedTrackName = trackName
       .replace(/</, '&lt;')
       .replace(/>/, '&gt;')
@@ -238,13 +238,16 @@ export class iXML implements Chunk {
 <BWFXML>
     <IXML_VERSION>1.27</IXML_VERSION>
     <TRACK_LIST>
-        <TRACK_COUNT>1</TRACK_COUNT>
-        <TRACK>
-            <CHANNEL_INDEX>1</CHANNEL_INDEX>
-            <INTERLEAVE_INDEX>1</INTERLEAVE_INDEX>
-            <NAME>${replacedTrackName}</NAME>
-        </TRACK>
-    </TRACK_LIST>
+        <TRACK_COUNT>${trackCount}</TRACK_COUNT>`;
+    for (let i = 0; i < trackCount; i++ ) {
+      let index = i + 1;
+      xml += `<TRACK>
+              <CHANNEL_INDEX>${index}</CHANNEL_INDEX>
+              <INTERLEAVE_INDEX>${index}</INTERLEAVE_INDEX>
+              <NAME>${replacedTrackName}</NAME>
+          </TRACK>`;
+    }
+    xml += `</TRACK_LIST>
 </BWFXML>`;
     return iXML.fromXml(xml);
   }

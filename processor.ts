@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import {Riff, iXML} from './riff';
+import {Riff, Fmt, iXML} from './riff';
 
 class Processor {
   constructor() {}
@@ -19,8 +19,16 @@ class Processor {
         }
       }
 
+      // get numChannels
+      let numChannels = 1;
+      for (let chunk of riff.subChunks) {
+        if (chunk instanceof Fmt) {
+          numChannels = chunk.numChannels;
+        }
+      }
+
       // add iXML chunk
-      let iXMLChunk = iXML.fromTrackName(trackName);
+      let iXMLChunk = iXML.fromTrackName(trackName, numChannels);
       riff.appendChunk(iXMLChunk);
 
       // write file
@@ -40,8 +48,16 @@ class Processor {
       }
     }
 
+    // get numChannels
+    let numChannels = 1;
+    for (let chunk of riff.subChunks) {
+      if (chunk instanceof Fmt) {
+        numChannels = chunk.numChannels;
+      }
+    }
+
     // add iXML chunk
-    let iXMLChunk = iXML.fromTrackName(trackName);
+    let iXMLChunk = iXML.fromTrackName(trackName, numChannels);
     riff.appendChunk(iXMLChunk);
 
     // write file
