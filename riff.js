@@ -101,6 +101,7 @@ class Fmt {
         buffer.writeUIntLE(this.bitsPerSample, 22, 2);
     }
 }
+exports.Fmt = Fmt;
 class WavData {
     constructor() {
         this.id = 'data';
@@ -157,7 +158,7 @@ class iXML {
         chunk.wavBuffer = xmlBuffer;
         return chunk;
     }
-    static fromTrackName(trackName) {
+    static fromTrackName(trackName, trackCount) {
         const replacedTrackName = trackName
             .replace(/</, '&lt;')
             .replace(/>/, '&gt;')
@@ -166,13 +167,15 @@ class iXML {
 <BWFXML>
     <IXML_VERSION>1.27</IXML_VERSION>
     <TRACK_LIST>
-        <TRACK_COUNT>1</TRACK_COUNT>
-        <TRACK>
-            <CHANNEL_INDEX>1</CHANNEL_INDEX>
-            <INTERLEAVE_INDEX>1</INTERLEAVE_INDEX>
-            <NAME>${replacedTrackName}</NAME>
-        </TRACK>
-    </TRACK_LIST>
+        <TRACK_COUNT>${trackCount}</TRACK_COUNT>`;
+        for (let i = 0; i < trackCount; i++) {
+            xml += `<TRACK>
+              <CHANNEL_INDEX>${i}</CHANNEL_INDEX>
+              <INTERLEAVE_INDEX>${i}</INTERLEAVE_INDEX>
+              <NAME>${replacedTrackName}</NAME>
+          </TRACK>`;
+        }
+        xml += `</TRACK_LIST>
 </BWFXML>`;
         return iXML.fromXml(xml);
     }

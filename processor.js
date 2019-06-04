@@ -12,7 +12,13 @@ class Processor {
                     return resolve(null);
                 }
             }
-            let iXMLChunk = riff_1.iXML.fromTrackName(trackName);
+            let numChannels = 1;
+            for (let chunk of riff.subChunks) {
+                if (chunk instanceof riff_1.Fmt) {
+                    numChannels = chunk.numChannels;
+                }
+            }
+            let iXMLChunk = riff_1.iXML.fromTrackName(trackName, numChannels);
             riff.appendChunk(iXMLChunk);
             let wbuffer = Buffer.alloc(riff.chunkLength);
             riff.write(wbuffer);
@@ -26,7 +32,13 @@ class Processor {
                 return null;
             }
         }
-        let iXMLChunk = riff_1.iXML.fromTrackName(trackName);
+        let numChannels = 1;
+        for (let chunk of riff.subChunks) {
+            if (chunk instanceof riff_1.Fmt) {
+                numChannels = chunk.numChannels;
+            }
+        }
+        let iXMLChunk = riff_1.iXML.fromTrackName(trackName, numChannels);
         riff.appendChunk(iXMLChunk);
         let wbuffer = Buffer.alloc(riff.chunkLength);
         riff.write(wbuffer);
