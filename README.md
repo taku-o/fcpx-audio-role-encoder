@@ -27,7 +27,7 @@ const trackName = ...;
 const processor = new Processor();
 processor.encode(wavBuffer, trackName)
 .then((outBuffer: Buffer) => {
-  // TODO
+  // TODO your action.
 });
 ```
 
@@ -58,6 +58,6 @@ processor.append(filePath, trackName, outPath)
 append iXML chunk to wav file.
 
 ```sh
-fcpx-audio-role-append -i in.wav -o out.wav -t trackName
+fcpx-audio-role-append encode -i in.wav -o out.wav -t trackName
 ```
 
